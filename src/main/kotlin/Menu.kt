@@ -1,54 +1,39 @@
-class Menu : ArchiveApp() {
+class Menu {
     private val options1 = mutableListOf<Pair<String, () -> Unit>>()
-    private val options2 = mutableListOf<Pair<String, () -> Unit>>()
-    private fun addOption(name: String, action: () -> Unit) {
+
+    fun addOption1(name: String, action: () -> Unit) {
         options1.add(Pair(name, action))
     }
-    fun addOption2(name: String, action: () -> Unit) {
-        options2.add(Pair(name, action))
+    fun readUserInput(menu: List<Pair<String, () -> Unit>>): Pair<String, () -> Unit>? {
+        val scan = readlnOrNull() ?: ""
+        val scanInt = scan.toIntOrNull()
+        if (scanInt == null || scanInt !in 1..menu.size) {
+            println("Ошибка! Неверный ввод.")
+            return null
+        }
+        return menu[scanInt - 1]
     }
 
-
-    private var isRunning = true // для остановки цикла
-
+    fun sortOptions(comparator: Comparator<Pair<String, () -> Unit>>) {
+        options1.sortWith(comparator)
+    }
 
     fun display() {
-
-        options1.add(Pair("Создать Архив") {
-            val result = addArchive()//создает архив
-            addOption(result.toString()) {
-
-
-            }
-
-        })
-
-        options1.add(Pair("Выход") { isRunning = false })//выход из программы
-
-        while (isRunning) {
-            println(" Список Архивов:")
-
-            options1.sortWith(compareBy { it.first == "Выход" })//сортировка
-            options1.forEachIndexed { index, pair -> println("${index + 1}.${pair.first}") }
-            val scan = readlnOrNull() ?: ""
-            val scanInt = scan.toIntOrNull()
-
-            if (scanInt == null || scanInt !in 1..options1.size) {
-                println("Ошибка!  Не верный ввод.")
-                continue
-            }
-
-            if (scanInt in 1..options1.size) {
-                val menuItem = options1[scanInt - 1]
-                menuItem.second.invoke()
-
-            }
-//            if (scanInt != options1.indexOf(Pair("Создать Архив") {})) {
-//
-//            }
-
+        for ((index, item) in options1.withIndex()) {
+            println("${index + 1}. ${item.first}")
         }
+        val menuItem = readUserInput(options1)
+        when {
+            menuItem != null -> {
+                menuItem.second.invoke()
+            }
+        }
+
     }
+    fun clearOptions1() {
+        options1.clear()
+    }
+
 }
 
 

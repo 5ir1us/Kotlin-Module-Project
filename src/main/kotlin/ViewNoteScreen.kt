@@ -1,6 +1,5 @@
-class ViewNoteScreen (private var note: Notes?) {
+class ViewNoteScreen (private var note: Note?) {
     // Экран просмотра заметки
-
 
     fun show() {
         if (note == null) {

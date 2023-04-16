@@ -1,8 +1,8 @@
-class Archive(private val archiveName: String) {
-    val notes = mutableListOf<Notes>()
-    fun addNote(note: Notes) {
+class Archive( val name: String) {
+    val notes = mutableListOf<Note>()// список заметок в архиве
+    fun addNote(note: Note) {
         notes.add(note)
-     println("запись '${note.title}' добавлено в архив' $archiveName'")
+        println("запись '${note.title}' добавлено в архив' $name'")
     }
 }
 

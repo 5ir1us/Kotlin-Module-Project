@@ -1,6 +1,6 @@
 fun main() {
-val run = Menu()
-    run.display()
+val run = ArchiveApp()
+    run.addArchive()
 
 
 

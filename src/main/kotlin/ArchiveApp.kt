@@ -1,17 +1,36 @@
-open class ArchiveApp {
+open class ArchiveApp { // список архивов в приложении
     private val archivesList = mutableListOf<Archive>()
+    val menu = Menu()
+    private var isRunning = true
+    fun addArchive() {
 
-    fun addArchive(): String {
+        while (isRunning) {
+            println(" Список Архивов:")
+            menu.clearOptions1()
+            menu.addOption1("Создать Архив") {
+                print("Введите имя архива: ")
+                val name = readlnOrNull() ?: ""
+                val archive = Archive(name)
+                println("*** Вы создали архив: $name ***\n   ")
+                archivesList.add(archive)
+            }
+            for (archive in archivesList) {
+                menu.addOption1(archive.name) {
+                    println("Вы выбрали архив ${archive.name}")
 
-        print("Введите имя архива: ")
-        val nameArchive = readlnOrNull() ?: ""
-        val archiveNew = Archive(nameArchive)
-        println("*** Вы создали архив: $nameArchive ***\n   ")
-        archivesList.add(archiveNew)
-        return nameArchive
+                    // Здесь добавить логику для работы с архивом
+                }
+            }
+
+            menu.addOption1("Выход") { isRunning = false }
+
+            menu.sortOptions(compareBy { it.first == "Выход" })
+
+            menu.display()
+
+        }
 
     }
-
 
 }
 
