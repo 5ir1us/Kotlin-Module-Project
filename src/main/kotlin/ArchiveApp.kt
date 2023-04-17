@@ -1,10 +1,11 @@
 open class ArchiveApp { // список архивов в приложении
     private val archivesList = mutableListOf<Archive>()
-    val menu = Menu()
+    private val menu = Menu()
+
     private var isRunning = true
     fun addArchive() {
 
-        while (isRunning) {
+        label@ while (isRunning) {
             println(" Список Архивов:")
             menu.clearOptions1()
             menu.addOption1("Создать Архив") {
@@ -17,17 +18,16 @@ open class ArchiveApp { // список архивов в приложении
             for (archive in archivesList) {
                 menu.addOption1(archive.name) {
                     println("Вы выбрали архив ${archive.name}")
+                    val not = NewNote(archive)
+                    not.show()
 
-                    // Здесь добавить логику для работы с архивом
                 }
             }
-
             menu.addOption1("Выход") { isRunning = false }
 
             menu.sortOptions(compareBy { it.first == "Выход" })
 
             menu.display()
-
         }
 
     }
