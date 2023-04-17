@@ -1,7 +1,7 @@
-class ViewNotesScreen(val archive: Archive) {
+class ViewNotesScreen(private val archive: Archive) {
 //    Экран просмотра списка заметок
-//    также тут хотел реализовать чать кода
-//    из NewNote  но что то пошло не так *(
+//    также тут хотел реализовать часть кода
+//    из NewNote  но что-то пошло не так *(
 
     fun show() {
 

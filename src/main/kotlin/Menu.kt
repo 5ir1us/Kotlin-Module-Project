@@ -8,7 +8,7 @@ class Menu {
     }
 
     //пользовательский ввод и проверка на ошибку
-    fun readUserInput(menu: List<Pair<String, () -> Unit>>): Pair<String, () -> Unit>? {
+    private fun readUserInput(menu: List<Pair<String, () -> Unit>>): Pair<String, () -> Unit>? {
         val scan = readlnOrNull() ?: ""
         val scanInt = scan.toIntOrNull()
         if (scanInt == null || scanInt !in 1..menu.size) {
